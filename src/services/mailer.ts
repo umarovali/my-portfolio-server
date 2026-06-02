@@ -13,8 +13,8 @@ interface MailData {
 }
 
 export async function sendOwnerEmail(data: MailData): Promise<void> {
-  await resend.emails.send({
-    from: "Portfolio",
+ const result  = await resend.emails.send({
+    from: "Portfolio <delivered@resend.dev>",
     to: OWNER_EMAIL,
     subject: `Новое сообщение от ${data.name}`,
     headers: {
@@ -37,11 +37,13 @@ export async function sendOwnerEmail(data: MailData): Promise<void> {
       </div>
     `,
   });
+console.log('Resend owner result:', result)
+
 }
 
 export async function sendUserEmail(data: MailData): Promise<void> {
   await resend.emails.send({
-    from: "Умаров Али",
+    from: "Умаров Али <onboarding@resend.dev>",
     to: data.email,
     subject: "Ваше сообщение получено",
     headers: {
